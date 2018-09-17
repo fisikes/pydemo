@@ -3,31 +3,32 @@ from typing import List
 import time
 
 # 读取dat
-f = open("all_stat_z_log.dat")
+f = open("age_met/all_stat_z_log.dat")
 lines = f.readlines()
 index = 1
 
+# 存放dat数据
 data_list = []
 
 for line in lines:
 
     if index > 2:  # 跳过第一二行
-        l: List[str] = line.split()
-        data_list.append(l)
+        dat: List[str] = line.split()
+        data_list.append(dat)
 
     index = index + 1
 
 f.close()
 
 # 读取csv
-csv_file = csv.reader(open("spec.csv"))
+csv_file = csv.reader(open("age_met/spec.csv"))
 rows = [row for row in csv_file]
 
 results = []  # 存放输出内容
 for stu in rows:
-    for l in data_list:
-        if l[0] == stu[3] and l[1] == stu[4] and l[2] == stu[5]:
-            result = l + stu
+    for dat in data_list:
+        if dat[0] == stu[3] and dat[1] == stu[4] and dat[2] == stu[5]:
+            result = dat + stu
             results.append(result)
             print(result)
             continue
